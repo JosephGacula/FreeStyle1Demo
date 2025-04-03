@@ -8,6 +8,17 @@ void isPowerOf2NoLoopTester(int);
 bool isPrimeNumber(int);
 void isPrimeNUmberTester(int);
 void fractionSimplifier(int,int);
+void test();
+class Fraction {
+public:
+    int numerator;
+    int denominator;
+    Fraction(int numerator, int denominator) : numerator(numerator), denominator(denominator) {}
+
+    std::string toString() {
+        return std::to_string(numerator) + "/" + std::to_string(denominator);
+    }
+};
 
 int main() {
     printf("Power of 2 tester with loop:\n");
@@ -20,6 +31,8 @@ int main() {
     isPrimeNUmberTester(10);
     fractionSimplifier(2,3);
     fractionSimplifier(4,8);
+    Fraction num1(2,4);
+    printf("%d/%d",num1.numerator,num1.denominator);
     return 0;
 }
 
@@ -97,6 +110,8 @@ void isPrimeNUmberTester(int num) {
 }
 
 void fractionSimplifier(int numer, int denom) {
+    //TODO add case for if denom is 0
+    //TODO add case for negative output
     int gcd = 1;
     for (int divisor = 1; divisor <= abs(numer) && divisor <= abs(denom); divisor++ ) {
         if (numer % divisor == 0 && denom % divisor == 0) {
@@ -109,5 +124,37 @@ void fractionSimplifier(int numer, int denom) {
 
        printf("PASS: %d/%d reduced is %d/%d\n", numer, denom, rNumer, rDenom);
 
+}
 
+
+Fraction reduce(Fraction input) { //DONE IN CLASS AS A DEMO, a/b
+
+
+
+
+}
+
+void test() {
+//given an input, the actual output should match the expected output
+    Fraction arrayInput[] = {Fraction(1,2), Fraction(2,4), Fraction (6,7)};
+    Fraction arrayOutput[] = {Fraction(1,2), Fraction(1,2), Fraction (6,7)};
+    Fraction input(2,4);
+    Fraction expectedOutput(1,2);
+
+    //call the function
+    Fraction actualOutput = reduce(input);
+
+    for (int i = 0; i < sizeof(arrayInput); i++) {
+        Fraction input = arrayInput[i];
+        Fraction expect = arrayOutput[i];
+    }
+
+
+    //compare expected vs actual
+    if ((expectedOutput.denominator == actualOutput.denominator) && (expectedOutput.numerator == actualOutput.numerator)){
+    printf("pass");
+
+    } else {
+        printf("fail");
+    }
 }
