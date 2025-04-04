@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+using namespace std;
 bool isPowerOf2Loop(int);
 void isPowerOf2LoopTester(int);
 bool isPowerOf2NoLoop(int);
@@ -9,18 +9,20 @@ bool isPrimeNumber(int);
 void isPrimeNUmberTester(int);
 void fractionSimplifier(int,int);
 void test();
-class Fraction {
+
+class Fraction { //Class created during 4/3 demo
 public:
     int numerator;
     int denominator;
     Fraction(int numerator, int denominator) : numerator(numerator), denominator(denominator) {}
 
-    std::string toString() {
-        return std::to_string(numerator) + "/" + std::to_string(denominator);
+    string toString() {
+        return to_string(numerator) + "/" + to_string(denominator);
     }
 };
 
 int main() {
+    //All test code methods are called here
     printf("Power of 2 tester with loop:\n");
     isPowerOf2LoopTester(8);
     isPowerOf2LoopTester(27);
@@ -58,7 +60,7 @@ bool isPowerOf2Loop(int num) {
 }
 
 void isPowerOf2LoopTester(int num) {
-    //Tests the Power of 2 tester and prints
+    //Tests the Power of 2 tester and prints as a test
     bool flag = isPowerOf2Loop(num);
     if (flag) {
         printf("%d is a power of 2\n", num);
@@ -68,7 +70,8 @@ void isPowerOf2LoopTester(int num) {
 }
 
 bool isPowerOf2NoLoop(int num) {
-    //ANSWER ASSISTED WITH CHAT, STILL UNFAMILIAR WITH BINARY STUFF
+    //Checks whether a number is a power of 2 without a loop, using the bit manipulation trick
+    //Understanding of bit manipulation trick aided by ChatGPT
     if (num < 1) {
         return false;
     } else {
@@ -87,6 +90,7 @@ void isPowerOf2NoLoopTester(int num) {
 }
 
 bool isPrimeNumber(int num) {
+    //Checks whether a number is a prime number
     if (num <= 1) {
         return false;
     } else if (num == 2 || num == 3) {
@@ -101,6 +105,7 @@ bool isPrimeNumber(int num) {
     }
 }
 void isPrimeNUmberTester(int num) {
+    //Tests the prime number checker
     bool flag = isPrimeNumber(num);
     if (flag) {
         printf("PASS\n");
@@ -110,27 +115,37 @@ void isPrimeNUmberTester(int num) {
 }
 
 void fractionSimplifier(int numer, int denom) {
-    //TODO add case for if denom is 0
-    //TODO add case for negative output
-    int gcd = 1;
-    for (int divisor = 1; divisor <= abs(numer) && divisor <= abs(denom); divisor++ ) {
-        if (numer % divisor == 0 && denom % divisor == 0) {
-            gcd = divisor;
+    if (denom == 0) {
+        cout << "Invalid denominator" << endl;
+        return;
+    } else {
+        int gcd = 1;
+        for (int divisor = 1; divisor <= abs(numer) && divisor <= abs(denom); divisor++ ) {
+            if (numer % divisor == 0 && denom % divisor == 0) {
+                gcd = divisor;
+            }
+        }
+        int rNumer = numer / gcd;
+        int rDenom = denom / gcd;
+
+        if ((rNumer / rDenom) == (numer / denom)) {
+            printf("PASS: %d/%d reduced is %d/%d\n", numer, denom, rNumer, rDenom);
+        } else {
+            printf("Fail: %d/%d reduced is not %d/%d\n", numer, denom, rNumer, rDenom);
         }
     }
-    int rNumer = numer / gcd;
-    int rDenom = denom / gcd;
-
-
-       printf("PASS: %d/%d reduced is %d/%d\n", numer, denom, rNumer, rDenom);
 
 }
 
-
 Fraction reduce(Fraction input) { //DONE IN CLASS AS A DEMO, a/b
 
-
-
+int gcd = 1;
+    for (int divisor = 1; divisor <=abs(input.numerator) && divisor <= abs(input.denominator); divisor++) {
+        if (input.numerator % divisor == 0 && input.denominator % divisor == 0) {
+            gcd = divisor;
+        }
+    }
+return Fraction(input.numerator / gcd, input.denominator / gcd);
 
 }
 
